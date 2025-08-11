@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu de Acessibilidade</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+
+    /* Link de acesso ao menu */
+    .link-acessibilidade {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #007BFF;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        z-index: 10000;
+    }
+    .link-acessibilidade:hover {
+        background: #0056b3;
+    }
+
+    /* Menu */
+    .acessibilidade-menu {
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: none;
+        z-index: 9999;
+    }
+
+    .acessibilidade-menu button {
+        display: block;
+        margin: 5px 0;
+        padding: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background: #007BFF;
+        color: white;
+        transition: background 0.3s;
+    }
+
+    .acessibilidade-menu button:hover {
+        background: #0056b3;
+    }
+
+    /* Alto contraste */
+    .alto-contraste {
+        background: black !important;
+        color: yellow !important;
+    }
+
+    /* Fonte legível */
+    .fonte-legivel {
+        font-family: "Verdana", sans-serif !important;
+    }
+</style>
+</head>
+<body>
+
+<!-- Link para abrir o menu -->
+<a href="#acessibilidade" class="link-acessibilidade">♿ Acessibilidade</a>
+
+<!-- Menu de Acessibilidade -->
+<div id="acessibilidade" class="acessibilidade-menu">
+    <button onclick="aumentarFonte()">Aumentar Fonte</button>
+    <button onclick="diminuirFonte()">Diminuir Fonte</button>
+    <button onclick="alternarContraste()">Alto Contraste</button>
+    <button onclick="alternarFonteLegivel()">Fonte Legível</button>
+    <button onclick="resetar()">Restaurar Padrão</button>
+</div>
+
+<h1>Bem-vindo ao site acessível</h1>
+<p>
+    Este é um exemplo de site com um menu de acessibilidade acessível por um link no canto superior direito.
+</p>
+
+<script>
+    let tamanhoFonte = 100;
+    let contrasteAtivo = false;
+    let fonteLegivelAtiva = false;
+
+    // Alternar visibilidade do menu
+    document.querySelector('.link-acessibilidade').addEventListener('click', function(e) {
+        e.preventDefault();
+        const menu = document.querySelector('.acessibilidade-menu');
+        menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+    });
+
+    function aumentarFonte() {
+        tamanhoFonte += 10;
+        document.body.style.fontSize = tamanhoFonte + "%";
+    }
+
+    function diminuirFonte() {
+        tamanhoFonte -= 10;
+        if (tamanhoFonte < 50) tamanhoFonte = 50;
+        document.body.style.fontSize = tamanhoFonte + "%";
+    }
+
+    function alternarContraste() {
+        contrasteAtivo = !contrasteAtivo;
+        document.body.classList.toggle("alto-contraste", contrasteAtivo);
+    }
+
+    function alternarFonteLegivel() {
+        fonteLegivelAtiva = !fonteLegivelAtiva;
+        document.body.classList.toggle("fonte-legivel", fonteLegivelAtiva);
+    }
+
+    function resetar() {
+        tamanhoFonte = 100;
+        contrasteAtivo = false;
+        fonteLegivelAtiva = false;
+        document.body.style.fontSize = "100%";
+        document.body.classList.remove("alto-contraste", "fonte-legivel");
+    }
+</script>
+
+</body>
+</html>
